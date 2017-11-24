@@ -98,7 +98,7 @@ default_ownership:
 # The simplest way to change the password is to run
 # openssl passwd -1
 # and put the output between the "" below.
-default_password_crypted: "$1$A9rC5fqi$AyUHt8uju2AuaW6quaNyx/"
+default_password_crypted: "$1$mF86/UHC$WvcIcX2t6crBz2onWxyac."
 
 # the default template type to use in the absence of any
 # other detected template. If you do not specify the template
@@ -269,7 +269,7 @@ manage_reverse_zones: []
 # if using cobbler with manage_dhcp, put the IP address
 # of the cobbler server here so that PXE booting guests can find it
 # if you do not set this correctly, this will be manifested in TFTP open timeouts.
-next_server: 192.168.120.227
+next_server: 192.168.56.1
 
 # settings for power management features.  optional.
 # see https://github.com/cobbler/cobbler/wiki/Power-management to learn more
@@ -289,7 +289,7 @@ power_template_dir: "/etc/cobbler/power"
 # first in it's BIOS order.  Enable this if PXE is first in your BIOS
 # boot order, otherwise leave this disabled.   See the manpage
 # for --netboot-enabled.
-pxe_just_once: 0
+pxe_just_once: 1
 
 # the templates used for PXE config generation are sourced
 # from what directory?
@@ -381,7 +381,7 @@ scm_track_mode: "git"
 # if you have a server that appears differently to different subnets
 # (dual homed, etc), you need to read the --server-override section
 # of the manpage for how that works.
-server: 192.168.120.227
+server: 192.168.56.1
 
 # If set to 1, all commands will be forced to use the localhost address
 # instead of using the above value which can force commands like
@@ -460,4 +460,3 @@ proxy_url_ext: ""
 # internal proxy - used by systems to reach cobbler for kickstarts
 # eg: proxy_url_int: "http://10.0.0.1:8080"
 proxy_url_int: ""
-

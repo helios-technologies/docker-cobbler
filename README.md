@@ -72,6 +72,35 @@ Use the accompanied Makefile to set it up. Issue make <target\> to make the foll
 * all:    Build image, mount iso, run the container and import the distribution
 * vbox:   Create a VirtualBox VNIC for listening on and issuing DHCP addresses. This is for testing Cobbler functionality in combination with Virtualbox VMs. Requires a working VirtualBox installation.
 
+### Vagrant
+
+Create a bridge to have an isolated network to work
+```
+brctl addbr cobbler
+ip link set cobbler up
+```
+
+Start cobbler
+```
+vagrant up
+vagrant ssh
+```
+
+UI will be accessible at [https://localhost:4443/cobbler_web] with cobbler/cobbler as credentials.
+
+#### Simple setup example
+
+First download a centos7 ISO and store it in dist/centos7.iso
+
+```
+vagrant ssh
+$ sudo -i
+# mkdir -p /mnt/centos7 && sudo mount -t iso9660 -o loop,ro -v /vagrant/dist/centos7.iso /mnt/centos7/
+# cobbler import --name=centos7 --arch=x86_64 --path=/mnt/centos7
+# cobbler profile add --name=centos7-sample --distro=centos7-x86_64 --kickstart=/var/lib/cobbler/kickstarts/sample.ks
+# cobbler system add --name=node1 --profile=centos7-sample --netboot-enabled=true --interface=eth0 --mac-address=00:16:3E:0B:2E:EE --netmask=255.255.255.0 --ip-address=192.168.56.200 --mtu=1500
+```
+
 ### Issue
 
 There is still some issue I can't fix:
